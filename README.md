@@ -1,7 +1,7 @@
 # Shelfish
 #E Holmberg
 #T Killgore
-#
+/*
 
 Project scoring checklist
 Team Name:
@@ -21,3 +21,4 @@ Mark all the elements below that you have addressed in your project. When I grad
 (a) Views 2 (b) Triggers 2
 (c) Transaction processing 2 (d) Prepared Statements 2
 (e) Stored Procedures 2 (f) Stored Functions 2
+*/
