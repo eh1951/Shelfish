@@ -1,7 +1,7 @@
-Executing welcome.php<br>
-
+<!-- Executing welcome.php<br>
+-->
 <html>
-<h1>Welcome to 24/7-Eleven</h1>
+<h1>Welcome to Shelfish</h1>
 </html>
 
 <?php
