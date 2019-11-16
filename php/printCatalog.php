@@ -1,3 +1,4 @@
+
 <?php
 //session_start();
 
@@ -8,7 +9,7 @@ function printCatalog() {
    
    // database connections are not persistent
    // recreate database link using saved session variables user and password 
-   $dbLink = connectDatabase('localhost', $_SESSION['user'], $_SESSION['password']);
+   $dbLink = connectDatabase('localhost', $_SESSION['Tyler Killgore'], $_SESSION['bd02231992']);
    
    if (!$dbLink) {
      print("No link to database! Exiting..<br>");
