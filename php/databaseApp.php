@@ -9,12 +9,14 @@
 	if (isUser($card_no)==True) {
 	// database connection successful
 	  print($card_no);
+	  print("\tFor testing purposes");
 	  //is user admin
 	  if(isAdmin($card_no)==True){
 	  	print("admin");
 	  	}
 	  else{
-	  	print("user");
+	  	include_once("patronFunctions.php");
+	  	print(patronFunctions());
 	  	}
 
    	//save username and password in session variables if database access was successful

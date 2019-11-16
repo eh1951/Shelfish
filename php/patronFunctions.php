@@ -1,7 +1,7 @@
 <?php
 #include_once("connectDatabase.php");
 
-function patronFunctions($choice){
+function patronFunctions(){
 	
 	Print('<br><h1>Patron Functions<br>');
 	print("<br><br><br><h2>1. book checkout</h2>");
@@ -14,6 +14,6 @@ function patronFunctions($choice){
 	print ("<input type=\"submit\" name=\"print list\" value=\"ok\">");
 	print("<h2>5. quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
-	print("patron id is " . $choice);
+	//print("patron id is " . $choice);
 }
 ?>
