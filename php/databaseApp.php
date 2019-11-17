@@ -3,6 +3,9 @@
 	include("api.php");
 	include_once("showMenu.php");
 	include_once("connectDatabase.php");
+	include_once("adminFunctions.php");
+	include_once("patronFunctions.php");
+
         //print ("Checking username/password <br>");
 	
 	$card_no = $_POST['card_no'];
@@ -11,11 +14,12 @@
 	  print($card_no);
 	  print("\tFor testing purposes");
 	  //is user admin
-	  if(isAdmin($card_no)==True){
-	  	print("admin");
+	  if(isAdmin($card_no)=="admin") {
+	  	print("is admin");
+	  	print(adminFunctions());
 	  	}
 	  else{
-	  	include_once("patronFunctions.php");
+	  	print("is not admin");
 	  	print(patronFunctions());
 	  	}
 

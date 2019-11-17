@@ -1,6 +1,6 @@
 <?php
 
-function adminFunctions($choice){
+function adminFunctions(){
 
 	print("<br><h1>Admin functions</h1>");
 	print("<h2>1. Add a book</h2>");
@@ -19,7 +19,7 @@ function adminFunctions($choice){
 	print ("<input type=\"submit\" name=\"print\" value=\"ok\">");
 	print("<h2>7. Quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
-	print("<br>Admin card number is " . $choice);
+	//print("<br>Admin card number is " . $choice);
 
 }
 
