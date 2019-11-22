@@ -1,11 +1,27 @@
+<html>
+<h1>Patron Functions</h1>
+<head>
+	<title>Patron Functions</title>
+</head>
+<body>
+	<form method="post" action="bookCheckout.php">
+		<input type="text" name="bookId" value="" label="Book Id">
+		<input type="text" name="branchId" value="" label="Branch Id">
+		<input type="submit" value="Checkout Book">
+</form>
+</body>
+</html>
+
+
+
+
 <?php
 #include_once("connectDatabase.php");
 
 function patronFunctions(){
 	
-	Print('<br><h1>Patron Functions<br>');
-	print("<br><br><br><h2>1. book checkout</h2>");
-	print("<input type=\"text\" name=\"checkoutBook\" value=\"\" /><br>");
+	//book checkout function
+	//print(bookCheckout());
 	print("<h2>2. book return</h2>");
 	print("<input type=\"text\" name=\"returnBook\" value=\"\" /><br>");
 	print("<h2>3. pay fine</h2>");
