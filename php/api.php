@@ -2,7 +2,7 @@
 
 $servername = "127.0.0.1";
 $username = "root";
-$password = "password";
+$password = "ilikepie114";
 $database = "Shelfish_development";
 $conn = new mysqli($servername, $username, $password, $database);
 
