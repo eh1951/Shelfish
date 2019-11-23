@@ -31,5 +31,22 @@ function isAdmin($card_no){
     return $row['role'];
     }
 }
+//admin functions as seen on adminFunctions.php
+function addBook($title,$publisher){
+	global $conn;
+	//what role does user have
+	$result = mysqli_query($conn,"INSERT from books ;");
+	while ($row = mysqli_fetch_array($result)) {
+    return $row['role'];
+    }
+}
+function isBookAvailable($book_id, $branch_id){
+	global $conn;
+	//is this book available
+	$result = mysqli_query($conn,"SELECT copy_no from copies where book_id = $book_id AND branch_id = $branch_id;");
+	while ($row = mysqli_fetch_array($result)) {
+    return $row['copy_no'];
+	}
+}
 ?>
 
