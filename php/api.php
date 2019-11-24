@@ -56,9 +56,8 @@ function isBookAvailable($book_id, $branch_id){
 }
 
 function printTopTen(){
-	global conn;
+	global $conn;
 	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;");
-);
 	while ($row = mysqli_fetch_array($result)) {
 	print_r($row);
 }	
@@ -70,8 +69,8 @@ function payFine($card_no, $money){
 	$query1 =("update borrowers set unpaid_dues -= $money, where card_no = $card_no;");
 	$result = mysqli_query($conn, $query1);
 	if (!$result){
-$flag = false;
-ehco "Error details: ". mysqli_error($conn);
+		$flag = false;
+		echo "Error details: ". mysqli_error($conn);
 	}
 	if($flag){
 mysqli_commit($conn);
@@ -83,14 +82,14 @@ echo "Fine NOT paid successfully";
 mysqli_close($conn);
 }
 function branchInfo($branch_id){
-	global conn;
+	global $conn;
 	$result = mysqli_query($conn, "SELECT * from branches where branch_id = $branch_id;");
 	while ($row = mysqli_fetch_array($result)){
 	print_r($row);
 }
 }
 function newPatron($name,$address,$phone){
-global conn;
+global $conn;
 mysqli_autocommit($conn,FALSE);
 $flag = true;
 $query1 = ("insert into borrowers values($name,$address,$phone");
@@ -98,10 +97,11 @@ $result = mysqli_query($conn, $query1);
 if (!$result){
 $flag = false;
 echo "Error details: ". mysqli_error($conn);
-} else{
-mysqli_rollback($conn);
-echo "Patron unsuccessfully added"
-}
+	} 
+else{
+	mysqli_rollback($conn);
+	echo "Patron unsuccessfully added";
+	}
 mysqli_close($conn);
 }
 function updateCopies($card_no, $book_id, $branch_id){
@@ -137,61 +137,5 @@ function branchExists($branch_id){
     	return false;
     	}
 	}
-}
-
-function printTopTen(){
-	global conn;
-	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;"
-);
-	while ($row = mysqli_fetch_array($result)) {
-	print_r($row);
-}	
-}
-function payFine($card_no, $money){
-	global $conn;
-	mysqli_autocommit($conn, FALSE);
-	$flag = true;
-	$query1 =("update borrowers set unpaid_dues -= $money, where card_no = $card_no;");
-	$result = mysqli_query($conn, $query1);
-	if (!$result){
-$flag = false;
-ehco "Error details: ". mysqli_error($conn);
-	}
-	if($flag){
-mysqli_commit($conn);
-echo "Fine paid successfully";
-} else {
-mysqli_rollback($conn);
-echo "Fine NOT paid successfully";
-}
-mysqli_close($conn);
-}
-function branchInfo($branch_id){
-	global conn;
-	$result = mysqli_query($conn, "SELECT * from branches where branch_id = $branch_id;");
-	while ($row = mysqli_fetch_array($result)){
-	print_r($row);
-}
-}
-function newPatron($name,$address,$phone){
-global conn;
-mysqli_autocommit($conn,FALSE);
-$flag = true;
-$query1 = ("insert into borrowers values($name,$address,$phone");
-$result = mysqli_query($conn, $query1);
-if (!$result){
-$flag = false;
-echo "Error details: ". mysqli_error($conn);
-} else{
-mysqli_rollback($conn);
-echo "Patron unsuccessfully added"
-}
-mysqli_close($conn);
-}
-function greaterThanAverage(){
-global $conn;
-$result = mysqli_query("select * from borrowers where unpaid_dues > (select avg(unpaid_dues) from borrowers;");)
-while ($row = mysqli_fetch_array($result)){
-print_f($row);
 }
 ?>

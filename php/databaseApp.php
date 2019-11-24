@@ -20,7 +20,7 @@
 	  	}
 	  else{
 	  	print("is not admin");
-	  	print(patronFunctions());
+	  	print(patronFunctions($card_no));
 	  	}
 
    	//save username and password in session variables if database access was successful
