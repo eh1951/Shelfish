@@ -8,7 +8,7 @@ function patronFunctions($card_no){
 	print(isAdmin($card_no));
 	print("<h1>Patron Functions</h1>");
 	//book checkout form
-	print("<form method=post\" action=\"patronFunctions.php\"\">");
+	print("<form method=post\" action=\"databaseApp.php\"\">");
 	print("<h3> Book Id&nbsp&nbsp Branch Id</h3>");
 	print("<input type=text\" name=\"bookIdCheckout\" value=\"\" label=\"Book Id\"\">");
 	print("<input type=text\" name=\"branchIdCheckout\" value=\"\" label=\"Branch Id\"\">");

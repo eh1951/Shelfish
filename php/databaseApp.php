@@ -6,7 +6,8 @@
 	include_once("patronFunctions.php");
 	include_once("adminFunctions.php");
 
-    //print ("Checking username/password <br>");
+	    //print ("Checking username/password <br>");
+	
 	
 	//$card_no = (isset($_POST["card_no"]) ? $_POST['card_no'] : null);
 	$card_no = $_POST['card_no'];
