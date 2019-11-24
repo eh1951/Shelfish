@@ -57,7 +57,7 @@ function isBookAvailable($book_id, $branch_id){
 
 function printTopTen(){
 	global conn;
-	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;"
+	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;");
 );
 	while ($row = mysqli_fetch_array($result)) {
 	print_r($row);
