@@ -27,9 +27,14 @@ function isUser($card_no) {
 function isAdmin($card_no){
 	global $conn;
 	//what role does user have
+	//echo "SELECT role from borrowers where card_no = $card_no;";
 	$result = mysqli_query($conn,"SELECT role from borrowers where card_no = $card_no;");
-	while ($row = mysqli_fetch_array($result)) {
-    return $row['role'];
+	$row = mysqli_fetch_array($result); 
+    if(($row['role'])=='admin'){
+    	return true;
+    }
+    else{
+    	return false;
     }
 }
 //admin functions as seen on adminFunctions.php
@@ -104,14 +109,32 @@ else{
 	}
 mysqli_close($conn);
 }
-function updateCopies($card_no, $book_id, $branch_id){
+function checkoutBook($card_no, $book_id, $branch_id){
 	global $conn;
+	global $card_no;
 	//decrement number of copies
-	mysqli_query($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
-	mysqli_query($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");
-	return "Book Checked Out!";
+	//mysqli_update($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
+	//mysqli_insert($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");
+	$sql = "UPDATE copies SET copy_no= copy_no - 1 where book_id = $book_id AND branch_id = $branch_id;";
+	if ($conn->query($sql) === TRUE) {
+		//card no seems to be null
+		$sql = "INSERT INTO loans (card_no, book_id, branch_id) 
+		VALUES ('$card_no', '$book_id', '$branch_id')";
+    	if ($conn->query($sql) === TRUE) {
 
+    		echo "Book Checked out";
+		}
+		else 
+		{
+    	echo "Error updating record: " . $conn->error;
+		}
+	} else 
+	{
+    echo "Error updating record: " . $conn->error;
 	}
+	$conn->close();
+
+}
 function bookExists($book_id){
 	global $conn;
 	//is this book available
@@ -153,9 +176,12 @@ function hasFines($card_no){
 }
 function currentLoans($card_no){
 	global $conn;
-	$result = mysqli_query($conn, "SELECT book_id from loans where card_no = $card_no AND date_due>getdate();");
+	$result = mysqli_query($conn, "SELECT book_id,date_return from loans where card_no = $card_no") or die( mysqli_error($conn));
+	//incorrectly returning 1 
 	while ($row = mysqli_fetch_array($result)) {
-	print_r($row);
+		if(empty($row['date_return']=='NULL')){
+			return $row['book_id']; 
+		}
 	}
 }
 ?>

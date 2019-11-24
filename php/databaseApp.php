@@ -3,24 +3,20 @@
 	include("api.php");
 	include_once("showMenu.php");
 	include_once("connectDatabase.php");
-	include_once("adminFunctions.php");
 	include_once("patronFunctions.php");
+	include_once("adminFunctions.php");
 
-        //print ("Checking username/password <br>");
+    //print ("Checking username/password <br>");
 	
+	//$card_no = (isset($_POST["card_no"]) ? $_POST['card_no'] : null);
 	$card_no = $_POST['card_no'];
-	if (isUser($card_no)==True) {
-	// database connection successful
-	  print($card_no);
-	  print("\tFor testing purposes");
-	  //is user admin
-	  if(isAdmin($card_no)=="admin") {
-	  	print("is admin");
-	  	print(adminFunctions());
+
+	if (isUser($card_no)) {
+	  if(isAdmin($card_no)){
+	  	adminFunctions($card_no);
 	  	}
 	  else{
-	  	print("is not admin");
-	  	print(patronFunctions($card_no));
+	  	patronFunctions($card_no);
 	  	}
 
    	//save username and password in session variables if database access was successful

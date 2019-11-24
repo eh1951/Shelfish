@@ -2,11 +2,10 @@
 include_once("api.php");
 //include("databaseApp.php");
 //include_once("index.php");
-$card_no = $_POST['card_no'];
-
 function patronFunctions($card_no){
 	//make visible to file
-	}
+	echo $card_no;
+	print(isAdmin($card_no));
 	print("<h1>Patron Functions</h1>");
 	//book checkout form
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
@@ -29,8 +28,10 @@ function patronFunctions($card_no){
 	print("<input type=\"submit\" name=\"submitPayment\" value=\"Pay Fines\"\">");
 	echo "insert current fine amount for card_no here";
 	print("</form>");
-	
+
 	print("<h2>4. print loaned book list</h2>");
+	//get loans
+	print(currentLoans($card_no));
 	print ("<input type=\"submit\" name=\"print list\" value=\"ok\">");
 	print("<h2>5. quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
@@ -52,7 +53,7 @@ function patronFunctions($card_no){
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
-					echo "insert book checkout function here";
+					echo checkoutBook($card_no, $bookIdCheckout,$branchIdCheckout);
 					}
 				else{
 					echo "book not available";
@@ -93,5 +94,5 @@ function patronFunctions($card_no){
 			echo "please input a dollar amount";
 		}
 	}
-
+}
 ?>
