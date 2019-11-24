@@ -138,4 +138,24 @@ function branchExists($branch_id){
     	}
 	}
 }
+function hasFines($card_no){
+	global $conn;
+	//is this book available
+	$result = mysqli_query($conn,"SELECT unpaid_dues from borrowers where card_no = $card_no;");
+	while ($row = mysqli_fetch_array($result)) {
+    if($row['unpaid_dues']>0){
+    	return true;
+    }
+    else{
+    	return false;
+    	}
+	}
+}
+function currentLoans($card_no){
+	global $conn;
+	$result = mysqli_query($conn, "SELECT book_id from loans where card_no = $card_no AND date_due>getdate();");
+	while ($row = mysqli_fetch_array($result)) {
+	print_r($row);
+	}
+}
 ?>

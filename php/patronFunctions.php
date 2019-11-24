@@ -22,8 +22,14 @@ function patronFunctions($card_no){
 	print("<input type=\"submit\" name=\"submitReturn\" value=\"Return Book\"\">");
 	print("</form>");
 	print("<br>");
+	//pay fine form
 	print("<h2>3. pay fine</h2>");
-	print("<input type=\"text\" name=\"fine\" value=\"\" /><br>");
+	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
+	print("<input type=\"text\" name=\"paymentAmount\" value=\"\" /><br>");
+	print("<input type=\"submit\" name=\"submitPayment\" value=\"Pay Fines\"\">");
+	echo "insert current fine amount for card_no here";
+	print("</form>");
+	
 	print("<h2>4. print loaned book list</h2>");
 	print ("<input type=\"submit\" name=\"print list\" value=\"ok\">");
 	print("<h2>5. quit</h2>");
@@ -37,6 +43,9 @@ function patronFunctions($card_no){
 	//return form values
 	$bookIdReturn = (isset($_GET["bookIdReturn"]) ? $_GET['bookIdReturn'] : null);
 	$submitReturn = (isset($_GET["submitReturn"]) ? $_GET['submitReturn'] : null);
+	//pay fine form values
+	$paymentAmount = (isset($_GET["paymentAmount"]) ? $_GET['paymentAmount'] : null);
+	$submitPayment = (isset($_GET["submitPayment"]) ? $_GET['submitPayment'] : null);
 
 
 	if (isset($_GET["submitCheckout"])){
@@ -68,6 +77,21 @@ function patronFunctions($card_no){
 		else{
 			echo "please retype this book id";
 		}
-		//echo bookCheckout($card_no,$bookId,$branchId)
 	}
+	if (isset($_GET["submitPayment"])){
+		//return book
+		if (!empty($paymentAmount)){
+			//if book exists 
+			if(hasFines($card_no)){
+				echo "insert book return function";
+			}
+			else{
+				echo "you don't have an unpaid balance";
+			}
+		}
+		else{
+			echo "please input a dollar amount";
+		}
+	}
+
 ?>
