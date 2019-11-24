@@ -16,7 +16,10 @@ function isUser($card_no) {
 	catch (exception $e) {
     //code to handle the exception
 	}
-	if($result->num_rows==1){
+	if (!$result) {
+    	return false;
+	}
+	elseif($result->num_rows==1){
 		return True;
 	}
 	else{

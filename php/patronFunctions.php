@@ -2,13 +2,12 @@
 include_once("api.php");
 //include("databaseApp.php");
 //include_once("index.php");
-function patronFunctions($card_no){
 	//make visible to file
-	echo $card_no;
-	print(isAdmin($card_no));
+	global $card_no;
+	print($card_no);
 	print("<h1>Patron Functions</h1>");
 	//book checkout form
-	print("<form method=post\" action=\"databaseApp.php\"\">");
+	print("<form method=post\" action=\"patronFunctions.php\"\">");
 	print("<h3> Book Id&nbsp&nbsp Branch Id</h3>");
 	print("<input type=text\" name=\"bookIdCheckout\" value=\"\" label=\"Book Id\"\">");
 	print("<input type=text\" name=\"branchIdCheckout\" value=\"\" label=\"Branch Id\"\">");
@@ -53,7 +52,7 @@ function patronFunctions($card_no){
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
-					echo checkoutBook($card_no, $bookIdCheckout,$branchIdCheckout);
+					checkoutBook($card_no, $bookIdCheckout,$branchIdCheckout);
 					}
 				else{
 					echo "book not available";
@@ -94,5 +93,5 @@ function patronFunctions($card_no){
 			echo "please input a dollar amount";
 		}
 	}
-}
+
 ?>
