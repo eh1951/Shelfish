@@ -1,4 +1,7 @@
+<html>
+<div class="jumbotron">
 <?php
+include('style.css');
 include_once("api.php");
 	//add book  
 	print("<form method=post\" action=\"adminFunctions.php\"\">");
@@ -110,3 +113,5 @@ function adminFunctions($card_no){
 
 
 ?>
+</div>
+</html>

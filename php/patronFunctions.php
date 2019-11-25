@@ -1,4 +1,7 @@
+<html>
+<div class="jumbotron">
 <?php
+include('style.css');
 include_once("api.php");
 //include("databaseApp.php");
 //include_once("index.php");
@@ -100,3 +103,5 @@ function patronFunctions($card_no){
 	echo $card_no;	
 }
 ?>
+</div>
+</html>
