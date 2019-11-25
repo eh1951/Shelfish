@@ -28,7 +28,8 @@ print("<h1>Patron Functions</h1>");
 	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
 	print("<input type=\"text\" name=\"paymentAmount\" value=\"\" /><br>");
 	print("<input type=\"submit\" name=\"submitPayment\" value=\"Pay Fines\"\">");
-	echo "insert current fine amount for card_no here";
+	//print loaned books 
+	printBalance($card_no);
 	print("</form>");
 
 	print("<h2>4. print loaned book list</h2>");

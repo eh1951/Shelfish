@@ -212,4 +212,17 @@ function printTopTenBorrowers(){
 	print_r($row['name']);
 	}	
 }
+function printBalance($card_no){
+	global $conn;
+	$result = mysqli_query($conn, "select unpaid_dues from borrowers where card_no='$card_no';");
+	while ($row = mysqli_fetch_array($result)) {
+	if($row['unpaid_dues']>0){
+		print("Please pay balance: ");
+		print_r($row['unpaid_dues']);
+		}
+		else{
+			print("You have no fines.");
+		}
+	}	
+}
 ?>
