@@ -42,7 +42,10 @@ include_once("api.php");
 
 	print("<h2>Top 10 borrowers</h2>");
 	printTopTenBorrowers();
+	print("<h2>Most Wanted</h2>");
 	getViewA();
+	print("<h2>Authors with most books in library</h2>");
+	getViewB();
 
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");

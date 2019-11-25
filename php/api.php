@@ -232,4 +232,16 @@ function getViewA(){
 	print("<br>");
 	}	
 }	
+//select * from prolific_writers;
+function getViewB(){
+	global $conn;
+	$result = mysqli_query($conn, "select * from prolific_writers;");
+	while ($row = mysqli_fetch_array($result)) {
+	print("Author Name: ");
+	print_r($row['name']);
+	print("   Books in Library: ");
+	print_r($row['number_of_books_in_library']);
+	print("<br>");
+	}	
+}	
 ?>
