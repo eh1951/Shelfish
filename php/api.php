@@ -5,7 +5,6 @@ $username = "root";
 $password = "password";
 $database = "Shelfish_development";
 $conn = new mysqli($servername, $username, $password, $database);
-
 function isUser($card_no) {
 	global $conn;
 	//does user exist
@@ -26,7 +25,6 @@ function isUser($card_no) {
 		return False;
 	}
 }
-
 function isAdmin($card_no){
 	global $conn;
 	//what role does user have
@@ -60,7 +58,6 @@ function isBookAvailable($book_id, $branch_id){
     	}
 	}
 }
-
 function printTopTen(){
 	global $conn;
 	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;");
@@ -96,7 +93,6 @@ $query1 = "INSERT into borrowers (name, address, phone, role) VALUES ('$name','$
 $result = mysqli_query($conn, $query1);
 echo "customer added";
 }
-
 function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
 	//decrement number of copies
@@ -236,6 +232,12 @@ function getTotal(){
 	while ($row = mysqli_fetch_array($result)) {
 	print("Total Fines: ");
 	print_r($row[0]);
+function patronLevel(){
+	global $conn;
+	$result = mysqli_query($conn, "SELECT card_no,name,patronLevel(unpaid_dues) as patron_description from borrowers where role = 'user' ORDER BY name; ");
+	while ($row = mysqli_fetch_array($result)){
+	print_r($row);
+	print("<br>");
 }
 }
 ?>
