@@ -6,6 +6,7 @@ include_once("api.php");
 //include("databaseApp.php");
 //include_once("index.php");
 	//make visible to file
+$card_no = (isset($_POST["card_no"]) ? $_POST['card_no'] : null);
 print("<h1>Patron Functions</h1>");
 	//book checkout form
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
