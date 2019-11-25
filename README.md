@@ -18,5 +18,5 @@ Database-related elements:
 		(b) Triggers 2 (DONE)
 		(c) Transaction processing 2 
 		(d) Prepared Statements 2 
-		(e) Stored Procedures 2 
-		(f) Stored Functions 2
+		(e) Stored Procedures 2 (DONE)
+		(f) Stored Functions 2 (DONE)

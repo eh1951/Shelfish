@@ -240,4 +240,12 @@ function getStoredProcedureB(){
 	print("<br>");
 	}
 }
+function getTotal(){
+	global $conn;
+	$result = mysqli_query($conn, "select sum(unpaid_dues) from borrowers;");
+	while ($row = mysqli_fetch_array($result)) {
+	print("Total Fines: ");
+	print_r($row[0]);
+}
+}
 ?>

@@ -52,12 +52,19 @@ include_once("api.php");
 	print("<form method=post\" action=\"adminFunctions.php\"\">"); 
 	print ("<input type=\"submit\" name=\"submitGetNames\" value=\"Get User List\">");
 	print("</form>");
-	
+
 	$submitGetNames = (isset($_GET["submitGetNames"]) ? $_GET['submitGetNames'] : null);
 	if (isset($_GET["submitGetNames"])){
 		print(getStoredProcedureB());
 	}
-
+	print("<br>");
+	print("<form method=post\" action=\"adminFunctions.php\"\">"); 
+	print ("<input type=\"submit\" name=\"submitGetTotal\" value=\"Get Total Fines\">");
+	print("</form>");
+	$submitGetTotal = (isset($_GET["submitGetTotal"]) ? $_GET['submitGetTotal'] : null);
+	if (isset($_GET["submitGetTotal"])){
+		print(getTotal());
+	}
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
