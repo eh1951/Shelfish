@@ -20,9 +20,9 @@ include_once("api.php");
 	//make new patron
 	print("<form method=post\" action=\"adminFunctions.php\"\">");
 	print("<h2>New patron</h2>");
-	print("<input type=\"text\" name=\"patronName\" value=\"\" /><br>");
-	print("<input type=\"text\" name=\"patronAddress\" value=\"\" /><br>");
-	print("<input type=\"text\" name=\"patronPhone\" value=\"\" /><br>");
+	print("Patron Name: "."<input type=\"text\" name=\"patronName\" value=\"\" /><br>");
+	print("Patron Address:"."<input type=\"text\" name=\"patronAddress\" value=\"\" /><br>");
+	print("Patron Phone: "."<input type=\"text\" name=\"patronPhone\" value=\"\" /><br>");
 	print("<input type=\"submit\"name=\"submitMakeNewPatron\" value=\"Add Patron\"\">");
 	print("</form>");
 
@@ -66,6 +66,22 @@ include_once("api.php");
 			echo "Please fill out all Find Book requirements";
 		}
 	}
+
+	//make new patron
+	$patronName = (isset($_GET["patronName"]) ? $_GET['patronName'] : null);
+	$patronAddress = (isset($_GET["patronAddress"]) ? $_GET['patronAddress'] : null);
+	$patronPhone = (isset($_GET["patronPhone"]) ? $_GET['patronPhone'] : null);
+	$submitMakeNewPatron = (isset($_GET["submitMakeNewPatron"]) ? $_GET['submitMakeNewPatron'] : null);
+	
+	if(isset($submitMakeNewPatron)){
+		if(!empty($patronName) AND !empty($patronAddress) AND !empty($patronPhone)){
+			newPatron($patronName,$patronAddress,$patronPhone);
+		}
+		else{
+			echo "Please fill out all Add Patron requirements";
+		}
+	}
+
 	//return form values
 	$bookIdReturn = (isset($_GET["bookIdReturn"]) ? $_GET['bookIdReturn'] : null);
 	$submitReturn = (isset($_GET["submitReturn"]) ? $_GET['submitReturn'] : null);

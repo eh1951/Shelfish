@@ -96,17 +96,18 @@ function branchInfo($branch_id){
 }
 function newPatron($name,$address,$phone){
 global $conn;
-mysqli_autocommit($conn,FALSE);
+//mysqli_autocommit($conn,FALSE);
 $flag = true;
-$query1 = ("insert into borrowers values('$name','$address','$phone';");
+$query1 = ("INSERT into borrowers (name, address, phone, role) VALUES ('$name','$address','$phone', 'user');");
+echo $query1;
 $result = mysqli_query($conn, $query1);
 if (!$result){
 $flag = false;
 echo "Error details: ". mysqli_error($conn);
 	} 
 else{
-	mysqli_rollback($conn);
-	echo "Patron unsuccessfully added";
+	//mysqli_rollback($conn);
+	echo "Patron successfully added";
 	}
 mysqli_close($conn);
 }
@@ -187,10 +188,14 @@ function currentLoans($card_no){
 function findBook($book_title){
 	global $conn;
 	//is this book available
-	$result = mysqli_query($conn,"SELECT book_id, branch_id from copies where book_id = (SELECT book_id from books where book_title='$book_title');");
-	echo $result;
-	while ($row = mysqli_fetch_array($result)) {
-    	print($row);
+	$sql = "SELECT book_id, branch_id from copies where book_id = (SELECT book_id from books where book_title='$book_title');";
+	$result = mysqli_query($conn,$sql);
+	echo $result['book_id'];
+	if($result){
+		echo $result;
+	}
+	else {
+    	echo "Could not find book";
 	}
 }
 ?>
