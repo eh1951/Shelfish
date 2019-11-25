@@ -78,6 +78,7 @@ print("<h1>Patron Functions</h1>");
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
+					global $card_no;
 					checkoutBook($card_no,$bookIdCheckout,$branchIdCheckout);
 					}
 				else{
@@ -94,7 +95,8 @@ print("<h1>Patron Functions</h1>");
 		if (!empty($bookIdReturn)){
 			//if book exists 
 			if(bookExists($bookIdReturn)){
-				echo "insert book return function";
+				//echo "insert book return function";
+				bookReturn($bookIdReturn);
 			}
 			else{
 				echo "book does not exist";
