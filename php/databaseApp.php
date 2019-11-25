@@ -1,5 +1,8 @@
+<html>
+<div class="jumbotron">
 <?php
 	session_start();
+	include('style.css');
 	include("api.php");
 	include_once("showMenu.php");
 	include_once("connectDatabase.php");
@@ -34,3 +37,5 @@
 	}
 	
 ?>
+</div>
+</html>

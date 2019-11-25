@@ -99,7 +99,6 @@ echo "customer added";
 
 function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
-	global $card_no;
 	//decrement number of copies
 	//mysqli_update($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
 	//mysqli_insert($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");

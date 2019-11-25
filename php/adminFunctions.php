@@ -59,10 +59,6 @@ include_once("api.php");
 	print ("<input type=\"submit\" name=\"submitBookInventory\" value=\"Get Book Inventory\">");
 	print("</form>");
 
-	$submitBookInventory = (isset($_GET["submitBookInventory"]) ? $_GET['submitBookInventory'] : null);
-	if (isset($_GET["submitBookInventory"])){
-		print(getStoredProcedureA());
-	}
 	$submitGetNames = (isset($_GET["submitGetNames"]) ? $_GET['submitGetNames'] : null);
 	if (isset($_GET["submitGetNames"])){
 		print(getStoredProcedureB());
