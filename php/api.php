@@ -233,10 +233,11 @@ function getStoredProcedureA(){
 }
 function getStoredProcedureB(){
 	global $conn;
-	$result = mysqli_query($conn, "select * from getNames;");
+	$result = mysqli_query($conn, "CALL getNames();");
 	while ($row = mysqli_fetch_array($result)) {
 	print("Name: ");
-	print_r($row['name']);
+	print_r($row[0]);
+	print("<br>");
 	}
 }
 ?>

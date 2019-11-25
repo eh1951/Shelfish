@@ -47,11 +47,23 @@ include_once("api.php");
 	print("<h2>Authors with most books in library</h2>");
 	getViewB();
 
+	//get big list of users
+	print("<br>");
+	print("<form method=post\" action=\"adminFunctions.php\"\">"); 
+	print ("<input type=\"submit\" name=\"submitGetNames\" value=\"Get User List\">");
+	print("</form>");
+	
+	$submitGetNames = (isset($_GET["submitGetNames"]) ? $_GET['submitGetNames'] : null);
+	if (isset($_GET["submitGetNames"])){
+		print(getStoredProcedureB());
+	}
+
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
 	print("</form>");
 
+	
 	//view A
 	//if add book submit clicked
 	$addBookTitle = (isset($_GET["addBookTitle"]) ? $_GET['addBookTitle'] : null);
