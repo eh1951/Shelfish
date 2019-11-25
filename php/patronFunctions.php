@@ -11,23 +11,21 @@ print("<h1>Patron Functions</h1>");
 	//book checkout form
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
 	print("<h2>1. Checkout Book</h2>");
-	print("<h3> Book Id&nbsp&nbsp Branch Id</h3>");
-	print("<input type=text\" name=\"bookIdCheckout\" value=\"\" label=\"Book Id\"\">");
-	print("<input type=text\" name=\"branchIdCheckout\" value=\"\" label=\"Branch Id\"\">");
+	print("Book Id: "."<input type=text\" name=\"bookIdCheckout\" value=\"\" label=\"Book Id\"\">");
+	print("Branch Id: "."<input type=text\" name=\"branchIdCheckout\" value=\"\" label=\"Branch Id\"\">");
 	print("<input type=\"submit\"name=\"submitCheckout\" value=\"Checkout Book\"\">");
 	print("</form>");
 	//book return form;
 	print("<h2>2. Return Book</h2>");
-	print("<h3>Book Id</h3>");	
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
-	print("<input type=text\" name=\"bookIdReturn\" value=\"\" label=\"Book Id\"\">");
+	print("Book Id: "."<input type=text\" name=\"bookIdReturn\" value=\"\" label=\"Book Id\"\">");
 	print("<input type=\"submit\" name=\"submitReturn\" value=\"Return Book\"\">");
 	print("</form>");
 	print("<br>");
 	//pay fine form
 	print("<h2>3. pay fine</h2>");
 	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
-	print("<input type=\"text\" name=\"paymentAmount\" value=\"\" /><br>");
+	print("Payment Amount: "."<input type=\"text\" name=\"paymentAmount\" value=\"\" /><br>");
 	print("<input type=\"submit\" name=\"submitPayment\" value=\"Pay Fines\"\">");
 	//print loaned books 
 	if(!isset($_GET["submitPayment"])){

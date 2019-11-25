@@ -96,6 +96,7 @@ $query1 = "INSERT into borrowers (name, address, phone, role) VALUES ('$name','$
 $result = mysqli_query($conn, $query1);
 echo "customer added";
 }
+
 function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
 	//decrement number of copies
