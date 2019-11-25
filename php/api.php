@@ -170,13 +170,16 @@ function currentLoans($card_no){
 }
 function findBook($book_title){
 	global $conn;
-	$sql = "select book_id, branch_id from copies where book_id=(select book_id from copies where book_id=(select book_id from books where book_title='$book_title'));";
+	$sql = "select book_id, branch_id from copies where book_id=(select book_id from copies where book_id=(select book_id from books where title='$book_title'));";
 	$result = mysqli_query($conn,$sql);
-	while ($row = mysqli_fetch_array($result)) {
+	if ($row = mysqli_fetch_array($result)) {
+	print("This book's Id is: ");
 	print_r($row['book_id']);
+	print("<br>");
+	print("You can find this book at Branch: ");
 	print_r($row['branch_id']);
 	}	
-	if(empty($row['book_id'])) {
+	else {
     	echo "Could not find book";
 	}
 }
