@@ -65,6 +65,10 @@ include_once("api.php");
 	if (isset($_GET["submitGetTotal"])){
 		print(getTotal());
 	}
+
+
+
+
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");

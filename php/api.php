@@ -2,7 +2,7 @@
 //connection
 $servername = "127.0.0.1";
 $username = "root";
-$password = "password";
+$password = "ilikepie114";
 $database = "Shelfish_development";
 $conn = new mysqli($servername, $username, $password, $database);
 function isUser($card_no) {
@@ -232,6 +232,8 @@ function getTotal(){
 	while ($row = mysqli_fetch_array($result)) {
 	print("Total Fines: ");
 	print_r($row[0]);
+}
+}
 function patronLevel(){
 	global $conn;
 	$result = mysqli_query($conn, "SELECT card_no,name,patronLevel(unpaid_dues) as patron_description from borrowers where role = 'user' ORDER BY name; ");

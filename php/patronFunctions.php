@@ -32,18 +32,15 @@ print("<h1>Patron Functions</h1>");
 		printBalance($card_no);
 	}
 	print("</form>");
-
 	print("<h2>4. print loaned book list</h2>");
 	//get loans
 	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
 	print ("<input type=\"submit\" name=\"getLoans\" value=\"Get list\">");
 	print("</form>");
-
 	$getLoans = (isset($_GET["getLoans"]) ? $_GET['getLoans'] : null);
 	if(isset($getLoans)){
 		currentLoans($card_no);
 	}
-
 	//get big list of book inventory
 	print("<br>");
 	print("<h2>5. Get Book Inventory</h2>");
@@ -51,13 +48,21 @@ print("<h1>Patron Functions</h1>");
 	print ("<input type=\"submit\" name=\"submitBookInventory\" value=\"Get Book Inventory\">");
 	print("</form>");
 
-	print("<h2>6. quit</h2>");
+	print("<br>");
+	print("<h2>6. Get patron descriptions</h2>");
+	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
+	print ("<input type=\"submit\" name=\"getPatronDescriptions\" value=\"getPatronDescriptions\">");
+	print("</form>");
+	$getPatronDescriptions = (isset($_GET["getPatronDescriptions"]) ? $_GET['getPatronDescriptions'] : null);
+	if (isset($_GET["getPatronDescriptions"])){
+		print(patronLevel());
+	}
+
+	print("<h2>7. quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"Logout\">");
 	print("</form>");
 	//print("patron id is " . $choice);
-
 	//$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);
-
 	//if checkout submit clicked
 	$bookIdCheckout = (isset($_GET["bookIdCheckout"]) ? $_GET['bookIdCheckout'] : null);
 	$branchIdCheckout = (isset($_GET["branchIdCheckout"]) ? $_GET['branchIdCheckout'] : null);
@@ -68,12 +73,10 @@ print("<h1>Patron Functions</h1>");
 	//pay fine form values
 	$paymentAmount = (isset($_GET["paymentAmount"]) ? $_GET['paymentAmount'] : null);
 	$submitPayment = (isset($_GET["submitPayment"]) ? $_GET['submitPayment'] : null);
-
 	$submitBookInventory = (isset($_GET["submitBookInventory"]) ? $_GET['submitBookInventory'] : null);
 	if (isset($_GET["submitBookInventory"])){
 		print(getStoredProcedureA());
 	}
-
 	if (isset($_GET["submitCheckout"])){
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
@@ -117,7 +120,6 @@ print("<h1>Patron Functions</h1>");
 		}
 	}
 function patronFunctions($card_no){
-
 	echo $card_no;	
 }
 ?>
