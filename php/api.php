@@ -191,17 +191,13 @@ function currentLoans($card_no){
 }
 function findBook($book_title){
 	global $conn;
-	//get book id 
-	$result = mysqli_query($conn,"SELECT book_id from books where book_title='$book_title';");
-	while ($row = mysqli_fetch_array($result)) {
-		$book_id = $result['book_id'];
-		}
-	$sql = "SELECT book_id, branch_id from copies where book_id='$book_id';";
+	$sql = "select book_id, branch_id from copies where book_id=(select book_id from copies where book_id=(select book_id from books where book_title='$book_title'));";
 	$result = mysqli_query($conn,$sql);
-	if($result){
-		echo $result['book_id'];
-	}
-	else {
+	while ($row = mysqli_fetch_array($result)) {
+	print_r($row['book_id']);
+	print_r($row['branch_id']);
+	}	
+	if(empty($row['book_id'])) {
     	echo "Could not find book";
 	}
 }
@@ -225,4 +221,15 @@ function printBalance($card_no){
 		}
 	}	
 }
+function getViewA(){
+	global $conn;
+	$result = mysqli_query($conn, "select * from top_ten_most_wanted;");
+	while ($row = mysqli_fetch_array($result)) {
+	print("Name: ");
+	print_r($row['name']);
+	print("   Fines: ");
+	print_r($row['unpaid_dues']);
+	print("<br>");
+	}	
+}	
 ?>

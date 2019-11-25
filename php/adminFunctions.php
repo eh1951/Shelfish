@@ -31,25 +31,25 @@ include_once("api.php");
 
 	//get branch info
 	print("<form method=post\" action=\"adminFunctions.php\"\">");
-	print("<h2>Print branch info</h2>");
 	print("Branch Id: "."<input type=\"text\" name=\"branchId\" value=\"\" /><br>");
 	print ("<input type=\"submit\" name=\"submitGetBranchInfo\" value=\"Get Branch Info\">");
 	print("</form>");
 
 
 	//top ten
-	print("<h2>Print top 10 frequently checked-out books</h2>");
+	print("<h2>Top 10 frequently checked-out books</h2>");
 	printTopTen();
 
-	print("<h2>Print top 10 borrowers</h2>");
+	print("<h2>Top 10 borrowers</h2>");
 	printTopTenBorrowers();
+	getViewA();
 
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
 	print("</form>");
 
-
+	//view A
 	//if add book submit clicked
 	$addBookTitle = (isset($_GET["addBookTitle"]) ? $_GET['addBookTitle'] : null);
 	$addBookAuthor = (isset($_GET["addBookAuthor"]) ? $_GET['addBookAuthor'] : null);

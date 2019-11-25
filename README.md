@@ -10,9 +10,9 @@ Database-related elements:
 	2. (10 points) Foreign keys, including cascade specifications 2 (implement pay fine->Cascade update cardno-unpaid fines)
 	3. Queries used in the project clearly demonstrate knowledge of the following SQL constructs:
 		(a) (10 points) Basic constructs like select, project, cartesian product, natural join 2 (DONE)
-		(b) (10 points) Aggregate functions like group by, sum, average, max etc. 2
-		(c) (10 points) Nested subqueries 2
-		(d) (10 points) Modification of the database like insert, update and delete 2 (add book AND pay fines)
+		(b) (10 points) Aggregate functions like group by, sum, average, max etc. 2 (DONE)
+		(c) (10 points) Nested subqueries 2 
+		(d) (10 points) Modification of the database like insert, update and delete 2 (DONE)
 	4. (10 points each) At least 4 of the 6 items listed below:
 		(a) Views 2 (b) Triggers 2
 		(c) Transaction processing 2 
