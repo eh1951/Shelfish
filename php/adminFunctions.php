@@ -29,13 +29,16 @@ include_once("api.php");
 	//get branch info
 	print("<form method=post\" action=\"adminFunctions.php\"\">");
 	print("<h2>Print branch info</h2>");
-	print ("<input type=\"submit\" name=\"print\" value=\"ok\">");
-	print("<h2>6. Print top 10 frequently checked-out books</h2>");
-	print ("<input type=\"submit\" name=\"submitGetBranchInfo\" value=\"Branch Info\">");
+	print("Branch Id: "."<input type=\"text\" name=\"branchId\" value=\"\" /><br>");
+	print ("<input type=\"submit\" name=\"submitGetBranchInfo\" value=\"Get Branch Info\">");
 	print("</form>");
 
+
+	//top ten
+	print("<h2>Print top 10 frequently checked-out books</h2>");
+	printTopTen();
+
 	print("<form method=post\" action=\"index.php\"\">"); 
-	print ("<input type=\"submit\" name=\"quitButton\" value=\"ok\">");
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
 	print("</form>");
@@ -76,6 +79,18 @@ include_once("api.php");
 	if(isset($submitMakeNewPatron)){
 		if(!empty($patronName) AND !empty($patronAddress) AND !empty($patronPhone)){
 			newPatron($patronName,$patronAddress,$patronPhone);
+		}
+		else{
+			echo "Please fill out all Add Patron requirements";
+		}
+	}
+
+	//print branch info
+	$branchId = (isset($_GET["branchId"]) ? $_GET['branchId'] : null);
+	$submitGetBranchInfo = (isset($_GET["submitGetBranchInfo"]) ? $_GET['submitGetBranchInfo'] : null);
+	if(isset($submitGetBranchInfo)){
+		if(!empty($submitGetBranchInfo)){
+			branchInfo($branchId);
 		}
 		else{
 			echo "Please fill out all Add Patron requirements";

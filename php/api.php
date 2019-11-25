@@ -65,7 +65,7 @@ function printTopTen(){
 	global $conn;
 	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;");
 	while ($row = mysqli_fetch_array($result)) {
-	print_r($row);
+	print_r($row['title']);
 }	
 }
 function payFine($card_no, $money){
@@ -90,9 +90,13 @@ mysqli_close($conn);
 function branchInfo($branch_id){
 	global $conn;
 	$result = mysqli_query($conn, "SELECT * from branches where branch_id = '$branch_id';");
-	while ($row = mysqli_fetch_array($result)){
-	print_r($row);
-}
+	while ($row = mysqli_fetch_array($result)) {
+		print("Branch Name: ");
+		print_r($row['branch_name']);
+		print("<br>");
+		print(" Branch Address: ");
+		print_r($row['branch_address']);
+	}	
 }
 function newPatron($name,$address,$phone){
 global $conn;
@@ -187,12 +191,15 @@ function currentLoans($card_no){
 }
 function findBook($book_title){
 	global $conn;
-	//is this book available
-	$sql = "SELECT book_id, branch_id from copies where book_id = (SELECT book_id from books where book_title='$book_title');";
+	//get book id 
+	$result = mysqli_query($conn,"SELECT book_id from books where book_title='$book_title';");
+	while ($row = mysqli_fetch_array($result)) {
+		$book_id = $result['book_id'];
+		}
+	$sql = "SELECT book_id, branch_id from copies where book_id='$book_id';";
 	$result = mysqli_query($conn,$sql);
-	echo $result['book_id'];
 	if($result){
-		echo $result;
+		echo $result['book_id'];
 	}
 	else {
     	echo "Could not find book";
