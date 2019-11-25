@@ -30,7 +30,9 @@ print("<h1>Patron Functions</h1>");
 	print("<input type=\"text\" name=\"paymentAmount\" value=\"\" /><br>");
 	print("<input type=\"submit\" name=\"submitPayment\" value=\"Pay Fines\"\">");
 	//print loaned books 
-	printBalance($card_no);
+	if(!isset($_GET["submitPayment"])){
+		printBalance($card_no);
+	}
 	print("</form>");
 
 	print("<h2>4. print loaned book list</h2>");
@@ -42,6 +44,12 @@ print("<h1>Patron Functions</h1>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
 	print("</form>");
 	//print("patron id is " . $choice);
+
+	//get big list of book inventory
+	print("<br>");
+	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
+	print ("<input type=\"submit\" name=\"submitBookInventory\" value=\"Get Book Inventory\">");
+	print("</form>");
 
 	$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);
 
@@ -56,6 +64,10 @@ print("<h1>Patron Functions</h1>");
 	$paymentAmount = (isset($_GET["paymentAmount"]) ? $_GET['paymentAmount'] : null);
 	$submitPayment = (isset($_GET["submitPayment"]) ? $_GET['submitPayment'] : null);
 
+	$submitBookInventory = (isset($_GET["submitBookInventory"]) ? $_GET['submitBookInventory'] : null);
+	if (isset($_GET["submitBookInventory"])){
+		print(getStoredProcedureA());
+	}
 
 	if (isset($_GET["submitCheckout"])){
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
@@ -92,10 +104,7 @@ print("<h1>Patron Functions</h1>");
 		if (!empty($paymentAmount)){
 			//if book exists 
 			if(hasFines($card_no)){
-				echo "insert book return function";
-			}
-			else{
-				echo "you don't have an unpaid balance";
+				payFine($card_no, $paymentAmount);
 			}
 		}
 		else{

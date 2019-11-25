@@ -70,21 +70,12 @@ function printTopTen(){
 }
 function payFine($card_no, $money){
 	global $conn;
-	mysqli_autocommit($conn, FALSE);
-	$flag = true;
-	$query1 =("update borrowers set unpaid_dues -= $money, where card_no = $card_no;");
-	$result = mysqli_query($conn, $query1);
-	if (!$result){
-		$flag = false;
-		echo "Error details: ". mysqli_error($conn);
-	}
-	if($flag){
-mysqli_commit($conn);
-echo "Fine paid successfully";
-} else {
-mysqli_rollback($conn);
-echo "Fine NOT paid successfully";
-}
+	//mysqli_autocommit($conn, FALSE);
+	if(isUser($card_no)){
+		$query1 =("UPDATE borrowers SET unpaid_dues = unpaid_dues-'$money' where card_no = '$card_no';");
+		$result = mysqli_query($conn, $query1);
+		echo "Payment successful";
+		} 
 mysqli_close($conn);
 }
 function branchInfo($branch_id){
@@ -101,19 +92,9 @@ function branchInfo($branch_id){
 function newPatron($name,$address,$phone){
 global $conn;
 //mysqli_autocommit($conn,FALSE);
-$flag = true;
-$query1 = ("INSERT into borrowers (name, address, phone, role) VALUES ('$name','$address','$phone', 'user');");
-echo $query1;
+$query1 = "INSERT into borrowers (name, address, phone, role) VALUES ('$name','$address','$phone', 'user');";
 $result = mysqli_query($conn, $query1);
-if (!$result){
-$flag = false;
-echo "Error details: ". mysqli_error($conn);
-	} 
-else{
-	//mysqli_rollback($conn);
-	echo "Patron successfully added";
-	}
-mysqli_close($conn);
+echo "customer added";
 }
 function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
@@ -170,15 +151,13 @@ function hasFines($card_no){
 	global $conn;
 	//is this book available
 	$result = mysqli_query($conn,"SELECT unpaid_dues from borrowers where card_no = $card_no;");
-	while ($row = mysqli_fetch_array($result)) {
-    if($row['unpaid_dues']>0){
-    	return true;
-    }
+    if($result['unpaid_dues']>0){
+    	echo true;
+    	}
     else{
-    	return false;
+    	echo false;
     	}
 	}
-}
 function currentLoans($card_no){
 	global $conn;
 	$result = mysqli_query($conn, "SELECT book_id,date_return from loans where card_no = $card_no") or die( mysqli_error($conn));
@@ -244,4 +223,20 @@ function getViewB(){
 	print("<br>");
 	}	
 }	
+function getStoredProcedureA(){
+	global $conn;
+	$result = mysqli_query($conn, "CALL get_all_books;");
+	while ($row = mysqli_fetch_array($result)) {
+	print_r($row[1]);
+	print("<br>");
+	}
+}
+function getStoredProcedureB(){
+	global $conn;
+	$result = mysqli_query($conn, "select * from getNames;");
+	while ($row = mysqli_fetch_array($result)) {
+	print("Name: ");
+	print_r($row['name']);
+	}
+}
 ?>
