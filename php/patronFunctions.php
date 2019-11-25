@@ -37,21 +37,28 @@ print("<h1>Patron Functions</h1>");
 
 	print("<h2>4. print loaned book list</h2>");
 	//get loans
-	//echo getCurrentLoans();
-	print("<form method=post\" action=\"index.php\"\">"); 
-	print ("<input type=\"submit\" name=\"quitButton\" value=\"ok\">");
-	print("<h2>5. quit</h2>");
-	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
+	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
+	print ("<input type=\"submit\" name=\"getLoans\" value=\"Get list\">");
 	print("</form>");
-	//print("patron id is " . $choice);
+
+	$getLoans = (isset($_GET["getLoans"]) ? $_GET['getLoans'] : null);
+	if(isset($getLoans)){
+		currentLoans($card_no);
+	}
 
 	//get big list of book inventory
 	print("<br>");
+	print("<h2>5. Get Book Inventory</h2>");
 	print("<form method=post\" action=\"patronFunctions.php\"\">"); 
 	print ("<input type=\"submit\" name=\"submitBookInventory\" value=\"Get Book Inventory\">");
 	print("</form>");
 
-	$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);
+	print("<h2>6. quit</h2>");
+	print ("<input type=\"submit\" name=\"quit\" value=\"Logout\">");
+	print("</form>");
+	//print("patron id is " . $choice);
+
+	//$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);
 
 	//if checkout submit clicked
 	$bookIdCheckout = (isset($_GET["bookIdCheckout"]) ? $_GET['bookIdCheckout'] : null);

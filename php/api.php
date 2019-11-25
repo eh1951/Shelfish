@@ -102,24 +102,10 @@ function checkoutBook($card_no,$book_id, $branch_id){
 	//mysqli_update($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
 	//mysqli_insert($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");
 	$sql = "UPDATE copies SET copy_no= copy_no - 1 where book_id = '$book_id' AND branch_id = '$branch_id';";
-	if ($conn->query($sql) === TRUE) {
-		//card no seems to be null
-		$sql = "INSERT INTO loans (card_no, book_id, branch_id) 
-		VALUES ('$card_no', '$book_id', '$branch_id')";
-    	if ($conn->query($sql) === TRUE) {
-
-    		echo "Book Checked out";
-		}
-		else 
-		{
-    	echo "Error updating record: " . $conn->error;
-		}
-	} else 
-	{
-    echo "Error updating record: " . $conn->error;
-	}
-	$conn->close();
-
+	$result = mysqli_query($conn, $sql);
+	//card no seems to be null
+	$sql = "INSERT INTO loans (card_no, book_id, branch_id) VALUES ('$card_no', '$book_id', '$branch_id')";
+	$result = mysqli_query($conn, $sql);
 }
 function bookExists($book_id){
 	global $conn;
@@ -160,11 +146,11 @@ function hasFines($card_no){
 	}
 function currentLoans($card_no){
 	global $conn;
-	$result = mysqli_query($conn, "SELECT book_id,date_return from loans where card_no = $card_no") or die( mysqli_error($conn));
+	$result = mysqli_query($conn, "SELECT book_id,date_return from loans where card_no = '$card_no';") or die( mysqli_error($conn));
 	//incorrectly returning 1 
 	while ($row = mysqli_fetch_array($result)) {
 		if(empty($row['date_return']=='NULL')){
-			return $row['book_id']; 
+			print($row['book_id']); 
 		}
 	}
 }
