@@ -3,9 +3,7 @@ include_once("api.php");
 //include("databaseApp.php");
 //include_once("index.php");
 	//make visible to file
-	global $card_no;
-	print($card_no);
-	print("<h1>Patron Functions</h1>");
+print("<h1>Patron Functions</h1>");
 	//book checkout form
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
 	print("<h3> Book Id&nbsp&nbsp Branch Id</h3>");
@@ -30,11 +28,15 @@ include_once("api.php");
 
 	print("<h2>4. print loaned book list</h2>");
 	//get loans
-	print(currentLoans($card_no));
-	print ("<input type=\"submit\" name=\"print list\" value=\"ok\">");
+	//echo getCurrentLoans();
+	print("<form method=post\" action=\"index.php\"\">"); 
+	print ("<input type=\"submit\" name=\"quitButton\" value=\"ok\">");
 	print("<h2>5. quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
+	print("</form>");
 	//print("patron id is " . $choice);
+
+	$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);
 
 	//if checkout submit clicked
 	$bookIdCheckout = (isset($_GET["bookIdCheckout"]) ? $_GET['bookIdCheckout'] : null);
@@ -52,7 +54,7 @@ include_once("api.php");
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
-					checkoutBook($card_no, $bookIdCheckout,$branchIdCheckout);
+					checkoutBook($card_no,$bookIdCheckout,$branchIdCheckout);
 					}
 				else{
 					echo "book not available";
@@ -93,5 +95,8 @@ include_once("api.php");
 			echo "please input a dollar amount";
 		}
 	}
+function patronFunctions($card_no){
 
+	echo $card_no;	
+}
 ?>

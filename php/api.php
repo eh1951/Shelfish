@@ -31,7 +31,7 @@ function isAdmin($card_no){
 	global $conn;
 	//what role does user have
 	//echo "SELECT role from borrowers where card_no = $card_no;";
-	$result = mysqli_query($conn,"SELECT role from borrowers where card_no = $card_no;");
+	$result = mysqli_query($conn,"SELECT role from borrowers where card_no = '$card_no';");
 	$row = mysqli_fetch_array($result); 
     if(($row['role'])=='admin'){
     	return true;
@@ -44,10 +44,8 @@ function isAdmin($card_no){
 function addBook($title,$publisher){
 	global $conn;
 	//what role does user have
-	$result = mysqli_query($conn,"INSERT from books ;");
-	while ($row = mysqli_fetch_array($result)) {
-    return $row['role'];
-    }
+	$result = mysqli_query($conn,"INSERT INTO books (title, publisher_name) VALUES ('$title','$publisher');");
+	echo "Book added successfully";
 }
 function isBookAvailable($book_id, $branch_id){
 	global $conn;
@@ -91,7 +89,7 @@ mysqli_close($conn);
 }
 function branchInfo($branch_id){
 	global $conn;
-	$result = mysqli_query($conn, "SELECT * from branches where branch_id = $branch_id;");
+	$result = mysqli_query($conn, "SELECT * from branches where branch_id = '$branch_id';");
 	while ($row = mysqli_fetch_array($result)){
 	print_r($row);
 }
@@ -100,7 +98,7 @@ function newPatron($name,$address,$phone){
 global $conn;
 mysqli_autocommit($conn,FALSE);
 $flag = true;
-$query1 = ("insert into borrowers values($name,$address,$phone");
+$query1 = ("insert into borrowers values('$name','$address','$phone';");
 $result = mysqli_query($conn, $query1);
 if (!$result){
 $flag = false;
@@ -112,13 +110,12 @@ else{
 	}
 mysqli_close($conn);
 }
-function checkoutBook($card_no, $book_id, $branch_id){
+function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
-	global $card_no;
 	//decrement number of copies
 	//mysqli_update($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
 	//mysqli_insert($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");
-	$sql = "UPDATE copies SET copy_no= copy_no - 1 where book_id = $book_id AND branch_id = $branch_id;";
+	$sql = "UPDATE copies SET copy_no= copy_no - 1 where book_id = '$book_id' AND branch_id = '$branch_id';";
 	if ($conn->query($sql) === TRUE) {
 		//card no seems to be null
 		$sql = "INSERT INTO loans (card_no, book_id, branch_id) 
@@ -185,6 +182,15 @@ function currentLoans($card_no){
 		if(empty($row['date_return']=='NULL')){
 			return $row['book_id']; 
 		}
+	}
+}
+function findBook($book_title){
+	global $conn;
+	//is this book available
+	$result = mysqli_query($conn,"SELECT book_id, branch_id from copies where book_id = (SELECT book_id from books where book_title='$book_title');");
+	echo $result;
+	while ($row = mysqli_fetch_array($result)) {
+    	print($row);
 	}
 }
 ?>

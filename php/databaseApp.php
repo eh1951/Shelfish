@@ -5,7 +5,7 @@
 	include_once("connectDatabase.php");
 	include_once("login.php");
 	    //print ("Checking username/password <br>");
-	
+
 
 	$card_no = (isset($_POST["card_no"]) ? $_POST['card_no'] : null);
 	//$card_no = $_GET['card_no'];
@@ -13,11 +13,12 @@
 	if (isUser($card_no)) {
 	  if(isAdmin($card_no)){
 	  	include("adminFunctions.php");
-	  	print(adminFunctions($card_no));
+	  	//print(adminFunctions($card_no));
+
 	  	}
 	  else{
 	  	include("patronFunctions.php");
-	  	print(patronFunctions($card_no));
+	  	//print(patronFunctions($card_no));
 	  	}
 
    	//save username and password in session variables if database access was successful
