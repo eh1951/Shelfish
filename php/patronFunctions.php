@@ -75,10 +75,18 @@ print("<h1>Patron Functions</h1>");
 	}
 
 	if (isset($_GET["submitCheckout"])){
+		print("<br>");
+		print("Please confirm card number");
+		print("<form method=post\" action=\"patronFunctions.php\"\">");
+		print("Book Id: "."<input type=text\" name=\"card_no\" value=\"\" label=\"Book Id\"\">");
+		print("<input type=\"submit\" name=\"confirmCardNo\" value=\"Card No\"\">");
+		print("</form>");
+	}
+	$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);			
+		if(isset($_GET["confirmCardNo"]) AND isset($_GET["submitCheckout"])){
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
-					global $card_no;
 					checkoutBook($card_no,$bookIdCheckout,$branchIdCheckout);
 					}
 				else{
@@ -89,7 +97,7 @@ print("<h1>Patron Functions</h1>");
 			else{
 				echo "book id or branch id does not exist";
 			}
-		}
+	}
 	if (isset($_GET["submitReturn"])){
 		//return book
 		if (!empty($bookIdReturn)){

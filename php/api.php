@@ -107,6 +107,7 @@ function checkoutBook($card_no,$book_id, $branch_id){
 	//card no seems to be null
 	$sql = "INSERT INTO loans (card_no, book_id, branch_id) VALUES ('$card_no', '$book_id', '$branch_id')";
 	$result = mysqli_query($conn, $sql);
+	echo "Book successfully checked out";
 }
 function bookExists($book_id){
 	global $conn;
