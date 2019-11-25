@@ -41,6 +41,9 @@ include_once("api.php");
 	print("<h2>Print top 10 frequently checked-out books</h2>");
 	printTopTen();
 
+	print("<h2>Print top 10 borrowers</h2>");
+	printTopTenBorrowers();
+
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");

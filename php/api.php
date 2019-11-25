@@ -205,4 +205,11 @@ function findBook($book_title){
     	echo "Could not find book";
 	}
 }
+function printTopTenBorrowers(){
+	global $conn;
+	$result = mysqli_query($conn, "select name from borrowers b, loans l where b.card_no = l.card_no group by l.card_no order by count(*) desc limit 10;");
+	while ($row = mysqli_fetch_array($result)) {
+	print_r($row['name']);
+	}	
+}
 ?>

@@ -9,12 +9,14 @@ include_once("api.php");
 print("<h1>Patron Functions</h1>");
 	//book checkout form
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
+	print("<h2>1. Checkout Book</h2>");
 	print("<h3> Book Id&nbsp&nbsp Branch Id</h3>");
 	print("<input type=text\" name=\"bookIdCheckout\" value=\"\" label=\"Book Id\"\">");
 	print("<input type=text\" name=\"branchIdCheckout\" value=\"\" label=\"Branch Id\"\">");
 	print("<input type=\"submit\"name=\"submitCheckout\" value=\"Checkout Book\"\">");
 	print("</form>");
 	//book return form;
+	print("<h2>2. Return Book</h2>");
 	print("<h3>Book Id</h3>");	
 	print("<form method=post\" action=\"patronFunctions.php\"\">");
 	print("<input type=text\" name=\"bookIdReturn\" value=\"\" label=\"Book Id\"\">");
