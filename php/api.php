@@ -244,5 +244,15 @@ function bookReturn($bookIdReturn){
 	$result = mysqli_query($conn, "DELETE from loans WHERE book_id='$bookIdReturn';");
 	print("Book Returned");
 }
+function patronLevel(){
+	global $conn;
+	$result = mysqli_query($conn,"SELECT card_no,name,patronLevel(unpaid_dues) as patronDescription from borrowers where role = 'user' ORDER BY card_no;");
+	while ($row = mysqli_fetch_array($result)) {
+	print_r($row[1]);
+	print(":   ");
+	print_r($row[2]);
+	print("<br>");
+	}
+}
 
 ?>

@@ -71,6 +71,12 @@ include_once("api.php");
 	if (isset($_GET["submitGetTotal"])){
 		print(getTotal());
 	}
+	print("<br>");
+	print("<h2>Patron levels</h2>");
+	//patron levels
+	patronLevel();
+	print("<br>");
+
 	print("<form method=post\" action=\"index.php\"\">"); 
 	print("<h2>quit</h2>");
 	print ("<input type=\"submit\" name=\"quit\" value=\"ok\">");
