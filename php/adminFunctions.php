@@ -83,6 +83,8 @@ include_once("api.php");
 	print("</form>");
 
 	
+	//get logout
+	$quit = (isset($_GET["addBookTitle"]) ? $_GET['addBookTitle'] : null);
 	//view A
 	//if add book submit clicked
 	$addBookTitle = (isset($_GET["addBookTitle"]) ? $_GET['addBookTitle'] : null);

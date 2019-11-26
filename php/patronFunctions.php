@@ -52,6 +52,7 @@ print("<h1>Patron Functions</h1>");
 	print("</form>");
 
 	print("<h2>6. quit</h2>");
+	print("<form method=post\" action=\"index.php\"\">"); 
 	print ("<input type=\"submit\" name=\"quit\" value=\"Logout\">");
 	print("</form>");
 	//print("patron id is " . $choice);
