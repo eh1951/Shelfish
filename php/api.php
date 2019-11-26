@@ -66,6 +66,7 @@ function printTopTen(){
 	$result = mysqli_query($conn, "select * from books b, loans l where b.book_id = l.book_id group by l.book_id order by count(*) desc limit 10;");
 	while ($row = mysqli_fetch_array($result)) {
 	print_r($row['title']);
+	print("<br>");
 }	
 }
 function payFine($card_no, $money){
@@ -158,7 +159,7 @@ function currentLoans($card_no){
 }
 function findBook($book_title){
 	global $conn;
-	$sql = "select book_id, branch_id from copies where book_id=(select book_id from copies where book_id=(select book_id from books where title='$book_title'));";
+	$sql = "select book_id,branch_id from copies where book_id=(select book_id from books where title='Carrie');";
 	$result = mysqli_query($conn,$sql);
 	if ($row = mysqli_fetch_array($result)) {
 	print("This book's Id is: ");
