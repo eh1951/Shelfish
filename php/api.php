@@ -176,6 +176,7 @@ function printTopTenBorrowers(){
 	$result = mysqli_query($conn, "select name from borrowers b, loans l where b.card_no = l.card_no group by l.card_no order by count(*) desc limit 10;");
 	while ($row = mysqli_fetch_array($result)) {
 	print_r($row['name']);
+	print("<br>");
 	}	
 }
 function printBalance($card_no){

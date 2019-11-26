@@ -132,7 +132,7 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `borrowers_AFTER_INSERT` AFTER INSERT ON `borrowers` FOR EACH ROW UPDATE unpaid_dues
 SET unpaid_dues=0.00 
 where 
-unpaid_dues=Null */;;
+unpaid_dues=Null; */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -185,7 +185,7 @@ CREATE TABLE `copies` (
 
 LOCK TABLES `copies` WRITE;
 /*!40000 ALTER TABLE `copies` DISABLE KEYS */;
-INSERT INTO `copies` VALUES (101,1001,17),(102,1002,0),(103,1003,1),(104,1001,2),(105,1002,3),(106,1001,4),(107,1003,1),(108,1003,3),(109,1002,4),(110,1001,4),(111,1003,6),(112,1002,2),(113,1003,2),(114,1001,4),(115,1001,2),(116,1002,1),(117,1001,1),(118,1002,6),(119,1001,7),(120,1002,6),(121,1001,4),(122,1003,3),(123,1001,2),(124,1003,1),(125,1001,5),(126,1002,1),(127,1003,1),(128,1001,4),(129,1001,6),(130,1002,7),(131,1001,5),(132,1003,4),(133,1003,3);
+INSERT INTO `copies` VALUES (101,1001,13),(102,1002,0),(103,1003,1),(104,1001,2),(105,1002,3),(106,1001,4),(107,1003,1),(108,1003,3),(109,1002,4),(110,1001,4),(111,1003,6),(112,1002,2),(113,1003,2),(114,1001,4),(115,1001,2),(116,1002,1),(117,1001,1),(118,1002,6),(119,1001,7),(120,1002,6),(121,1001,4),(122,1003,3),(123,1001,2),(124,1003,1),(125,1001,5),(126,1002,1),(127,1003,1),(128,1001,4),(129,1001,6),(130,1002,7),(131,1001,5),(132,1003,4),(133,1003,3);
 /*!40000 ALTER TABLE `copies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,25 +213,9 @@ CREATE TABLE `loans` (
 
 LOCK TABLES `loans` WRITE;
 /*!40000 ALTER TABLE `loans` DISABLE KEYS */;
-INSERT INTO `loans` VALUES (101,1001,1007,'2019-11-15','2019-11-29',NULL);
+INSERT INTO `loans` VALUES (101,1001,1003,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `loans` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `loans_AFTER_INSERT` AFTER INSERT ON `loans` FOR EACH ROW UPDATE loans 
-SET date_out=current_date() where date_out=null; */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `prolific_writers`
@@ -310,6 +294,34 @@ SET character_set_client = @saved_cs_client;
 --
 -- Dumping routines for database 'Shelfish_development'
 --
+/*!50003 DROP FUNCTION IF EXISTS `patronLevel` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `patronLevel`(
+unpaid_dues DECIMAL(4,2)) RETURNS varchar(20) CHARSET utf8
+    DETERMINISTIC
+BEGIN
+  DECLARE patronLevel VARCHAR(20);
+
+  if unpaid_dues > 00.00 THEN
+    SET patronLevel = 'BAD';
+  ELSE 
+    SET patronLevel = 'GOOD';
+  END IF;
+  RETURN(patronLevel);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getNames` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -394,4 +406,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-25  7:56:23
+-- Dump completed on 2019-11-25  9:05:41
