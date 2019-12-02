@@ -41,9 +41,20 @@ print("<h1>Patron Functions</h1>");
 
 	$getLoans = (isset($_GET["getLoans"]) ? $_GET['getLoans'] : null);
 	if(isset($getLoans)){
-		currentLoans($card_no);
+		print("<br>");
+		print("Please confirm card number");
+		print("<form method=post\" action=\"patronFunctions.php\"\">");
+		print("<input type=text\" name=\"card_no_loans\" value=\"\" label=\"Book Id\"\">");
+		print("<input type=\"submit\" name=\"submitGetLoans\" value=\"Card No\"\">");
+		print("</form>");
+		$submitGetLoans = (isset($_GET["submitGetLoans"]) ? $_GET['submitGetLoans'] : null);
 	}
-
+	$submitGetLoans = (isset($_GET["submitGetLoans"]) ? $_GET['submitGetLoans'] : null);
+	#$submit_get_loans = (isset($_GET["submitGetLoans"]) ? $_GET['submitGetLoans'] : null);
+	if(isset($submitGetLoans)){
+		$card_no_loans = (isset($_GET["card_no_loans"]) ? $_GET['card_no_loans'] : null);
+		currentLoans($card_no_loans);
+		}
 	//get big list of book inventory
 	print("<br>");
 	print("<h2>5. Get Book Inventory</h2>");
@@ -79,16 +90,17 @@ print("<h1>Patron Functions</h1>");
 		print("<br>");
 		print("Please confirm card number");
 		print("<form method=post\" action=\"patronFunctions.php\"\">");
-		print("Book Id: "."<input type=text\" name=\"card_no\" value=\"\" label=\"Book Id\"\">");
+		print("<input type=text\" name=\"card_noCheckout\" value=\"\" label=\"\"\">");
 		print("<input type=\"submit\" name=\"confirmCardNo\" value=\"Card No\"\">");
 		print("</form>");
 	}
-	$card_no = (isset($_GET["card_no"]) ? $_GET['card_no'] : null);			
-		if(isset($_GET["confirmCardNo"]) AND isset($_GET["submitCheckout"])){
+	$card_noCheckout = (isset($_GET["card_noCheckout"]) ? $_GET['card_noCheckout'] : null);			
+	if(isset($_GET["card_noCheckout"])){
+		//if checkout submit clicked
 		if (!empty($branchIdCheckout)AND !empty($bookIdCheckout)) {
 			if(bookExists($bookIdCheckout) AND branchExists($branchIdCheckout)){
 				if(isBookAvailable($bookIdCheckout,$branchIdCheckout)){
-					checkoutBook($card_no,$bookIdCheckout,$branchIdCheckout);
+					checkoutBook($card_noCheckout,$bookIdCheckout,$branchIdCheckout);
 					}
 				else{
 					echo "book not available";
@@ -98,7 +110,7 @@ print("<h1>Patron Functions</h1>");
 			else{
 				echo "book id or branch id does not exist";
 			}
-	}
+		}
 	if (isset($_GET["submitReturn"])){
 		//return book
 		if (!empty($bookIdReturn)){

@@ -50,7 +50,7 @@ function addBook($title,$publisher){
 function isBookAvailable($book_id, $branch_id){
 	global $conn;
 	//is this book available
-	$result = mysqli_query($conn,"SELECT copy_no from copies where book_id = $book_id AND branch_id = $branch_id;");
+	$result = mysqli_query($conn,"SELECT copy_no from copies where book_id = '$book_id' AND branch_id = '$branch_id';");
 	while ($row = mysqli_fetch_array($result)) {
     if($row['copy_no']>0){
     	return true;
@@ -100,20 +100,21 @@ echo "customer added";
 
 function checkoutBook($card_no,$book_id, $branch_id){
 	global $conn;
+	print("here");
 	//decrement number of copies
 	//mysqli_update($conn,"UPDATE copy_no from copies where book_id = $book_id AND branch_id = $branch_id SET copy_no=copy_no-1;");
 	//mysqli_insert($conn,"INSERT INTO loans SET card_no=$card_no book_id = $book_id AND branch_id = $branch_id AND date_out=getdate() AND date_due=adddate(now(),+7) ;");
 	$sql = "UPDATE copies SET copy_no= copy_no - 1 where book_id = '$book_id' AND branch_id = '$branch_id';";
 	$result = mysqli_query($conn, $sql);
 	//card no seems to be null
-	$sql = "INSERT INTO loans (card_no, book_id, branch_id) VALUES ('$card_no', '$book_id', '$branch_id')";
+	$sql = "INSERT INTO loans (card_no, book_id, branch_id) VALUES ('$card_no', '$book_id', '$branch_id');";
 	$result = mysqli_query($conn, $sql);
-	echo "Book successfully checked out";
+	print("Book successfully checked out");
 }
 function bookExists($book_id){
 	global $conn;
 	//is this book available
-	$result = mysqli_query($conn,"SELECT book_id from copies where book_id = $book_id;");
+	$result = mysqli_query($conn,"SELECT book_id from copies where book_id = '$book_id';");
 	while ($row = mysqli_fetch_array($result)) {
     if($row['book_id']>0){
     	return true;
@@ -126,7 +127,7 @@ function bookExists($book_id){
 function branchExists($branch_id){
 	global $conn;
 	//is this book available
-	$result = mysqli_query($conn,"SELECT branch_id from copies where branch_id = $branch_id;");
+	$result = mysqli_query($conn,"SELECT branch_id from copies where branch_id = '$branch_id';");
 	while ($row = mysqli_fetch_array($result)) {
     if($row['branch_id']>0){
     	return true;
@@ -149,17 +150,17 @@ function hasFines($card_no){
 	}
 function currentLoans($card_no){
 	global $conn;
-	$result = mysqli_query($conn, "SELECT book_id,date_return from loans where card_no = '$card_no';") or die( mysqli_error($conn));
+	$result = mysqli_query($conn, "SELECT book_id from loans where card_no = '$card_no' AND date_return IS NULL;");
 	//incorrectly returning 1 
 	while ($row = mysqli_fetch_array($result)) {
-		if(empty($row['date_return']=='NULL')){
-			print($row['book_id']); 
-		}
+			print("Book Id: ");
+			print($row['book_id']);
+			print("<br>");
 	}
 }
 function findBook($book_title){
 	global $conn;
-	$sql = "select book_id,branch_id from copies where book_id=(select book_id from books where title='Carrie');";
+	$sql = "select book_id,branch_id from copies where book_id=(select book_id from books where title='$book_title');";
 	$result = mysqli_query($conn,$sql);
 	if ($row = mysqli_fetch_array($result)) {
 	print("This book's Id is: ");
